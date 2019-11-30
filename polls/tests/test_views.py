@@ -7,9 +7,6 @@ from django.urls import reverse
 from polls.models import Question
 
 
-# Create your tests here.
-
-
 def create_question(question_text, days):
     """
     Create a question with the given `question_text` and published the
@@ -102,4 +99,5 @@ class QuestionDetailViewTests(TestCase):
         past_question = create_question(question_text='Past Question.', days=-5)
         url = reverse('polls:detail', args=(past_question.id,))
         response = self.client.get(url)
- 
+
+        self.assertContains(response, past_question.question_text)
